@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main">
+	{% if messages %}
+		{% for message in messages %}
+			{{ message }}
+		{% endfor %}
+	{% endif %}
+
+	<form method="POST">
+		{% csrf_token %}
+		<div>
+			<input id="body" name="body" type="text" placeholder="New entry">
+			<button type="submit" class="btn-weak">
+				<i class="fa fa-plus"></i>
+			</button>
+		</div>
+	</form>
+
+	{% if entries %}
+		<table class="pad-table">
+			{% for entry in entries %}
+				<tr>
+					<td>
+						{{ entry }}
+					</td>
+					<td>
+						{% if entry.archived == False %}
+							<a href="{% url 'archive_entry' entry.id %}">Archive</a>
+						{% else %}
+							<a href="{% url 'unarchive_entry' entry.id %}">Unarchive</a>
+						{% endif %}
+					</td>
+					<td>
+						<a href="{% url 'delete' entry.id %}">Delete</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+</div>
+
+{% endblock %}
