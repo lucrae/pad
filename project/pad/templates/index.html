@@ -3,6 +3,11 @@
 {% block content %}
 
 <div class="main">
+
+	<a href="{% url 'index' %}">Main</a> | 
+	<a href="{% url 'archive' %}">Archive</a>
+	<hr>
+
 	{% if messages %}
 		{% for message in messages %}
 			{{ message }}
@@ -12,10 +17,10 @@
 	<form method="POST">
 		{% csrf_token %}
 		<div>
-			<input id="body" name="body" type="text" placeholder="New entry">
-			<button type="submit" class="btn-weak">
+			<input id="body" name="body" type="text" placeholder="New entry" class='text-field'>
+			<!-- <button type="submit" class="btn-weak">
 				<i class="fa fa-plus"></i>
-			</button>
+			</button> -->
 		</div>
 	</form>
 

@@ -52,3 +52,9 @@ html, body {
     padding: 0 4px;
     cursor: pointer;
 }
+
+.text-field {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 8px;
+}

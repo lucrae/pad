@@ -7,13 +7,15 @@ def index(request):
     if request.method == 'POST':
         form = EntryForm(request.POST or None)
         if form.is_valid():
-            form.save()
+            body = form.cleaned_data['body']
+            new_entry = Entry(body=body)
+            new_entry.save()
             entries = Entry.objects.all
             messages.success(request, ('Entry added to pad'))
             return render(request, 'index.html', {'entries': entries})
-    else:
-        entries = Entry.objects.all
-        return render(request, 'index.html', {'entries': entries})
+    
+    entries = Entry.objects.all
+    return render(request, 'index.html', {'entries': entries})
 
 def delete(request, entry_id):
     entry = Entry.objects.get(pk=entry_id)
